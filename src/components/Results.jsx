@@ -9,21 +9,16 @@ export const Results = () => {
   const { results, loading, getResults, searchTerm } = useStateContext();
   const location = useLocation();
 
-  // useEffect(() => {
-  //   if (searchTerm !== "") {
-  //     if (location.pathname === "/videos") {
-  //       getResults(`/search/q=${searchTerm} videos`);
-  //     } else {
-  //       getResults(`${location.pathname}/q=${searchTerm}&num=40`);
-  //     }
-  //   }
-  // }, [searchTerm, location.pathname]);
-
   useEffect(() => {
-    getResults("/search/q=Javascript&num=40");
-  }, []);
+    if (searchTerm !== "") {
+      if (location.pathname === "/video") {
+        getResults(`/search/q=${searchTerm} videos`);
+      } else {
+        getResults(`${location.pathname}/q=${searchTerm}`);
+      }
+    }
+  }, [searchTerm, location.pathname]);
 
-  console.log(results);
   if (loading) return <Loading />;
 
   switch (location.pathname) {
@@ -44,8 +39,27 @@ export const Results = () => {
           ))}
         </div>
       );
+    case "/image":
+      return (
+        <div className="flex flex-wrap justify-center items-center">
+          {results?.image_results?.map(
+            ({ image, link: { href, title } }, index) => (
+              <a
+                href={href}
+                target="_blank"
+                key={index}
+                rel="noreferrer"
+                className="sm:p-3 p-5"
+              >
+                <img src={image?.src} alt={title} loading="lazy" />
+                <p className="sm:w-36 w-36 break-words text-sm mt-2">{title}</p>
+              </a>
+            )
+          )}
+        </div>
+      );
+
     default:
       return "Error...";
   }
-  console.log(results);
 };

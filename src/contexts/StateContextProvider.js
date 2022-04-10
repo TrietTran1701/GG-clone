@@ -24,8 +24,10 @@ export const StateContextProvider = ({ children }) => {
 
     if (url.includes("/news")) {
       setResults(data.entries);
+    } else if (url.includes("/image")) {
+      setResults(data.image_results);
     } else {
-      setResults(data);
+      setResults(data.results);
     }
     setLoading(false);
   };

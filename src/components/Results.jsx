@@ -21,7 +21,7 @@ export const Results = () => {
     case "/search":
       return (
         <div className="sm:px-56 flex flex-wrap justify-between space-y-6">
-          {results?.results?.map(({ link, title }, index) => (
+          {results?.map(({ link, title }, index) => (
             <div key={index} className="md:w-2/5 w-full">
               <a href={link} target="_blank" rel="noreferrer">
                 <p className="text-sm">
@@ -38,20 +38,18 @@ export const Results = () => {
     case "/image":
       return (
         <div className="flex flex-wrap justify-center items-center">
-          {results?.image_results?.map(
-            ({ image, link: { href, title } }, index) => (
-              <a
-                href={href}
-                target="_blank"
-                key={index}
-                rel="noreferrer"
-                className="sm:p-3 p-5"
-              >
-                <img src={image?.src} alt={title} loading="lazy" />
-                <p className="sm:w-36 w-36 break-words text-sm mt-2">{title}</p>
-              </a>
-            )
-          )}
+          {results?.map(({ image, link: { href, title } }, index) => (
+            <a
+              href={href}
+              target="_blank"
+              key={index}
+              rel="noreferrer"
+              className="sm:p-3 p-5"
+            >
+              <img src={image?.src} alt={title} loading="lazy" />
+              <p className="sm:w-36 w-36 break-words text-sm mt-2">{title}</p>
+            </a>
+          ))}
         </div>
       );
     case "/news":
@@ -87,7 +85,7 @@ export const Results = () => {
     case "/video":
       return (
         <div className="flex flex-wrap ">
-          {results?.results?.map((video, index) => (
+          {results.map((video, index) => (
             <div key={index} className="p-2">
               <ReactPlayer
                 url={video.additional_links?.[0].href}

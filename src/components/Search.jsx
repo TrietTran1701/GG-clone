@@ -1,5 +1,12 @@
 import React from "react";
-
+import { Links } from "./Links";
 export const Search = () => {
-  return <div>Search</div>;
+  return (
+    <>
+      <div>
+        Search
+        <Links></Links>
+      </div>
+    </>
+  );
 };

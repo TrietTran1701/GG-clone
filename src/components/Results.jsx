@@ -17,8 +17,6 @@ export const Results = () => {
 
   if (loading) return <Loading />;
 
-  console.log(results);
-
   switch (location.pathname) {
     case "/search":
       return (
